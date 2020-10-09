@@ -1,0 +1,12 @@
+const path = require('path');
+const fs = require('fs').promises //надо чтобы не обвалился сервер если нет нужного файла
+
+const getAllCards = (req, res) => {
+  fs.readFile(path.join(__dirname, '../data/cards.json'))
+    .then(data => res.send(JSON.parse(data)))
+    .catch((err) => res.status(500).send({ message: `Ошибка: ${err}` }))
+};
+
+module.exports = {
+  getAllCards
+}

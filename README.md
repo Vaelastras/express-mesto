@@ -1,14 +1,18 @@
-# Проект Mesto фронтенд + бэкенд
+##  Mesto Backend 🍄 🚧
 
-## Директории
+Here we have a backend for the Place project.
+We'll learn to сreate our own API for our project.
 
-`/public` — статика, полученная в результате билда фронтенд-приложения на Реакте  
-`/data` — JSON-файлы для временной эмуляции работы с базой данных  
-`/routes` — папка с файлами роутера  
+
+
+## User directory
+
+>`/public` — Static, which compile in Mesto fronend project by ReactJS  
+`/data` — JSON-files for temporary work emulation with database  
+`/routes` — Router-file folder  
   
-Остальные директории вспомогательные, создаются при необходимости разработчиком
 
-## Запуск проекта
+### How to run
 
-`npm run start` — запускает сервер   
-`npm run dev` — запускает сервер с hot-reload
+> `npm run start` — type in terminal window for run server   
+`npm run dev` — run server with support a hot-reload
