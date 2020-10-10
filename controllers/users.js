@@ -1,10 +1,10 @@
 const path = require('path');
-const fs = require('fs').promises //надо чтобы не обвалился сервер если нет нужного файла
+const fs = require('fs').promises;
 
 const getAllUsers = (req, res) => {
   fs.readFile(path.join(__dirname, '../data/users.json'))
-    .then(file => res.send(JSON.parse(file)))
-    .catch((err) => res.status(500).send({ message: `Ошибка: ${err}` }))
+    .then((file) => res.send(JSON.parse(file)))
+    .catch((err) => res.status(500).send({ message: `Ошибка: ${err}` }));
 };
 
 const getCurrentUser = (req, res) => {
@@ -17,11 +17,12 @@ const getCurrentUser = (req, res) => {
       }
       res.send(user);
     })
-    .catch((err) => { res.status(500).send({ message: `Ошибка: ${err}` });
-  });
+    .catch((err) => {
+      res.status(500).send({ message: `Ошибка: ${err}` });
+    });
 };
 
 module.exports = {
   getAllUsers,
-  getCurrentUser
-}
+  getCurrentUser,
+};
