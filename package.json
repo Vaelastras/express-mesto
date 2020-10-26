@@ -2,9 +2,8 @@
   "name": "mesto-backend",
   "version": "1.0.0",
   "description": "backend app for mesto project",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
     "dev": "nodemon app.js"
   },
@@ -25,10 +24,12 @@
   },
   "homepage": "https://github.com/Vaelastras/express-mesto#readme",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "eslint": "^7.10.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.22.1",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mongoose": "^5.10.9"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"
