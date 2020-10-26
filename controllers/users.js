@@ -1,28 +1,45 @@
-const path = require('path');
-const fs = require('fs').promises;
+const User = require('../models/user');
 
+// запрос всех юзеров
 const getAllUsers = (req, res) => {
-  fs.readFile(path.join(__dirname, '../data/users.json'))
-    .then((file) => res.send(JSON.parse(file)))
-    .catch((err) => res.status(500).send({ message: `Ошибка: ${err}` }));
+  User.find({})
+    .then((users) => res.send(users))
+    .catch((err) => res.status(500).send({ message: `Internal Server error: ${err}` }));
 };
 
-const getCurrentUser = (req, res) => {
-  fs.readFile(path.join(__dirname, '../data/users.json'))
-    .then((file) => {
-      const user = JSON.parse((file)).find((item) => item._id === req.params.id);
+// запрос 1го юзера по id
+const getUserById = (req, res) => {
+  User.findById(req.params.id)
+    .then((user) => {
       if (!user) {
-        res.status(404).send({ message: 'Нет пользователя с таким id' });
-        return;
+        return res.status(404).send({ message: 'Oops, that user doesn\'t exist' });
       }
-      res.send(user);
+      return res.send({ data: user });
     })
     .catch((err) => {
-      res.status(500).send({ message: `Ошибка: ${err}` });
+      if (err.name === 'CastError') {
+        return res.status(404).send({ message: 'Oops, that user doesn\'t exist' });
+      }
+      return res.status(500).send({ message: `Internal Server error: ${err}` });
+    });
+};
+
+// создание нового пользователя
+const createUser = (req, res) => {
+  const { name, about, avatar } = req.body;
+
+  User.create({ name, about, avatar })
+    .then((user) => res.send(user))
+    .catch((err) => {
+      if (err.name === 'ValidationError') {
+        return res.status(400).send({ message: 'Validation error. Please type a right data!' });
+      }
+      return res.status(500).send({ message: `Internal Server error: ${err}` });
     });
 };
 
 module.exports = {
   getAllUsers,
-  getCurrentUser,
+  getUserById,
+  createUser,
 };
