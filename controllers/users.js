@@ -9,7 +9,7 @@ const getAllUsers = (req, res) => {
 
 // запрос 1го юзера по id
 const getUserById = (req, res) => {
-  User.findById(req.params.id)
+  User.findById(req.params.userId)
     .then((user) => {
       if (!user) {
         return res.status(404).send({ message: 'Oops, that user doesn\'t exist' });
@@ -18,7 +18,7 @@ const getUserById = (req, res) => {
     })
     .catch((err) => {
       if (err.name === 'CastError') {
-        return res.status(404).send({ message: 'Oops, that user doesn\'t exist' });
+        return res.status(400).send({ message: 'Validation error. Please type a right data!' });
       }
       return res.status(500).send({ message: `Internal Server error: ${err}` });
     });
